@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres         # Замените на ваше имя пользователя
+      POSTGRES_PASSWORD: postgres     # Замените на ваш пароль
+      POSTGRES_DB: calender_messenger            # Замените на имя вашей базы данных
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+
+volumes:
+  pg_data:

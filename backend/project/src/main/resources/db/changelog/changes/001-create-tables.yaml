@@ -1,0 +1,90 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-messenger-type-enum
+      author: liquibase
+      changes:
+        - sql:
+            sql: |
+              DO $$ BEGIN
+                CREATE TYPE messenger_type_enum AS ENUM ('TELEGRAM', 'KAKAO');
+              EXCEPTION
+                WHEN duplicate_object THEN null;
+              END $$;
+
+  - changeSet:
+      id: create-users-table
+      author: liquibase
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deleted_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: create-messengers-table
+      author: liquibase
+      changes:
+        - createTable:
+            tableName: messengers
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: messenger_nick
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: messenger_type
+                  type: messenger_type_enum
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_messenger_user
+                    references: users(id)
+              - column:
+                  name: deleted_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true

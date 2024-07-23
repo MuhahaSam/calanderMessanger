@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: update-messengers-table-constraints
+      author: liquibase
+      changes:
+        - addUniqueConstraint:
+            tableName: messengers
+            columnNames: messenger_nick, messenger_type
+            constraintName: uk_messenger_nick_type

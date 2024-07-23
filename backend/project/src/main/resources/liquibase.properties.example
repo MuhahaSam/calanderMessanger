@@ -1,0 +1,14 @@
+# Database Configuration
+driver=org.postgresql.Driver
+url=jdbc:postgresql://localhost:5432/calendar_messenger
+username=your_username
+password=your_password
+
+# Changelog Configuration
+changeLogFile=db/changelog/change-log.master.yaml
+
+# Reference Configuration (for diff)
+referenceUrl=hibernate:spring:com.messageCalender.project.user.entities?dialect=org.hibernate.dialect.PostgreSQLDialect
+
+# Diff Configuration
+diffTypes=data,tables,views,columns,indexes,foreignkeys,primarykeys,uniqueconstraints 
