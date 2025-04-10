@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.messageCalender.project.user.entities.softDelete.SoftDelete;
@@ -26,6 +27,7 @@ import com.messageCalender.project.user.entities.softDelete.SoftDeleteFilter;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @SoftDelete
 @SoftDeleteFilter
 public class MessengerEntity {

@@ -1,6 +1,6 @@
 package com.messageCalender.project.user.mapper;
 
-import com.messageCalender.project.user.dto.CreateMessengerDto;
+import com.messageCalender.project.user.dto.create.CreateMessengerDto;
 import com.messageCalender.project.user.entities.MessengerEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

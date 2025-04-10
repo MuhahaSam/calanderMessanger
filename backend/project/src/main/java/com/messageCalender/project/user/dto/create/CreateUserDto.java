@@ -1,4 +1,4 @@
-package com.messageCalender.project.user.dto;
+package com.messageCalender.project.user.dto.create;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;

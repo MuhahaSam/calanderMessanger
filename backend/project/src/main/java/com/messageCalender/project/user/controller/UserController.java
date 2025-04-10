@@ -1,7 +1,8 @@
 package com.messageCalender.project.user.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.messageCalender.project.user.dto.CreateUserDto;
+import com.messageCalender.project.user.dto.create.CreateUserDto;
+import com.messageCalender.project.user.dto.read.UserResponseDto;
 import com.messageCalender.project.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -11,10 +12,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigInteger;
 
 @RestController
 @RequestMapping("/users")
@@ -34,5 +34,16 @@ public class UserController {
     public ResponseEntity<Void> create(@Valid @RequestBody CreateUserDto userDto) throws JsonProcessingException {
         userService.create(userDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @Operation(summary = "Get user by ID", description = "Returns user details with messengers by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User found successfully"),
+            @ApiResponse(responseCode = "400", description = "User not found")
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponseDto> getById(@PathVariable BigInteger id) {
+        UserResponseDto user = userService.getById(id);
+        return ResponseEntity.ok(user);
     }
 }
